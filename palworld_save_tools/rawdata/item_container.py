@@ -27,7 +27,7 @@ def decode_bytes(
         "item_static_ids": reader.tarray(lambda r: r.fstring()),
     }
     if not reader.eof():
-        raise Exception("Warning: EOF not reached")
+        data["trailing_unparsed_data"] = [b for b in reader.read_to_end()]
     return data
 
 
@@ -51,5 +51,7 @@ def encode_bytes(p: dict[str, Any]) -> bytes:
     writer.tarray(
         lambda w, d: (w.fstring(d), None)[1], p["permission"]["item_static_ids"]
     )
+    if "trailing_unparsed_data" in p:
+        writer.write(bytes(p["trailing_unparsed_data"]))
     encoded_bytes = writer.bytes()
     return encoded_bytes
