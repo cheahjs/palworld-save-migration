@@ -23,6 +23,7 @@ class TestCliScripts(unittest.TestCase):
             ("larger-saves/Level.sav"),
             ("larger-saves/LocalData.sav"),
             ("larger-saves/00000000000000000000000000000001.sav"),
+            ("v0.2.0.6/Level.sav"),
         ]
     )
     def test_sav_roundtrip(self, file_name):
