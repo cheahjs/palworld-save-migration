@@ -1,9 +1,12 @@
 import contextlib
-import os
+import os, sys
 import subprocess
 import unittest
 
 from parameterized import parameterized
+
+
+python = sys.executable
 
 
 class TestCliScripts(unittest.TestCase):
@@ -33,7 +36,7 @@ class TestCliScripts(unittest.TestCase):
             # Convert sav to JSON
             run = subprocess.run(
                 [
-                    "python3",
+                    python,
                     "-m",
                     "palworld_save_tools.commands.convert",
                     f"tests/testdata/{dir_name}/{base_name}",
@@ -50,7 +53,7 @@ class TestCliScripts(unittest.TestCase):
             )
             run = subprocess.run(
                 [
-                    "python3",
+                    python,
                     "-m",
                     "palworld_save_tools.commands.convert",
                     f"tests/testdata/{dir_name}/1-{base_name}.json",
@@ -65,7 +68,7 @@ class TestCliScripts(unittest.TestCase):
             )
             run = subprocess.run(
                 [
-                    "python3",
+                    python,
                     "-m",
                     "palworld_save_tools.commands.convert",
                     f"tests/testdata/{dir_name}/2-{base_name}",
@@ -82,7 +85,7 @@ class TestCliScripts(unittest.TestCase):
             )
             run = subprocess.run(
                 [
-                    "python3",
+                    python,
                     "-m",
                     "palworld_save_tools.commands.convert",
                     f"tests/testdata/{dir_name}/3-{base_name}.json",
