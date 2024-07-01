@@ -7,6 +7,7 @@ from palworld_save_tools.commands.convert import (
     convert_sav_to_json,
 )
 from palworld_save_tools.palsav import decompress_sav_to_gvas
+from palworld_save_tools.paltypes import DISABLED_PROPERTIES, PALWORLD_CUSTOM_PROPERTIES
 
 
 def main():
@@ -17,7 +18,14 @@ def main():
     print(f"Testing if {input_path} is the same after resaving...")
     output_json_path = input_path + ".resave.json"
     output_sav_path = input_path + ".resave.sav"
-    convert_sav_to_json(input_path, output_json_path, minify=True)
+    convert_sav_to_json(
+        input_path,
+        output_json_path,
+        minify=True,
+        custom_properties_keys=list(
+            set(PALWORLD_CUSTOM_PROPERTIES.keys()) - DISABLED_PROPERTIES
+        ),
+    )
     convert_json_to_sav(output_json_path, output_sav_path)
     print(f"Comparing {input_path} and {output_sav_path}...")
     with open(input_path, "rb") as f:
