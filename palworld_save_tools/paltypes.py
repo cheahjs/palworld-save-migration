@@ -48,6 +48,9 @@ PALWORLD_TYPE_HINTS: dict[str, str] = {
     ".worldSaveData.DungeonSaveData.DungeonSaveData.MapObjectSaveData.MapObjectSaveData.ConcreteModel.ModuleMap.Value": "StructProperty",
     ".worldSaveData.InvaderSaveData.Key": "Guid",
     ".worldSaveData.InvaderSaveData.Value": "StructProperty",
+    ".worldSaveData.OilrigSaveData.OilrigMap.Value": "StructProperty",
+    ".worldSaveData.SupplySaveData.SupplyInfos.Key": "Guid",
+    ".worldSaveData.SupplySaveData.SupplyInfos.Value": "StructProperty",
 }
 
 PALWORLD_CUSTOM_PROPERTIES: dict[
@@ -110,4 +113,10 @@ PALWORLD_CUSTOM_PROPERTIES: dict[
         map_object.decode,
         map_object.encode,
     ),
+}
+
+# List of properties that are not working with newer versions
+DISABLED_PROPERTIES = {
+    ".worldSaveData.BaseCampSaveData.Value.ModuleMap",
+    ".worldSaveData.MapObjectSaveData",
 }
