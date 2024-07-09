@@ -488,6 +488,11 @@ class FArchiveReader:
                 "value_struct_type": value_struct_type,
                 "id": _id,
                 "value": values,
+            }        
+        elif type_name == "UInt32Property":
+            value = {
+                "value": self.u32(),
+                "id": self.optional_guid(),
             }
         else:
             raise Exception(f"Unknown type: {type_name} ({path})")
