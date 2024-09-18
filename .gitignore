@@ -7,6 +7,7 @@ localtest
 /legacy
 __pycache__
 *.prof
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
