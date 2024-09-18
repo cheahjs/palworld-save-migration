@@ -490,10 +490,19 @@ class FArchiveReader:
                 "id": _id,
                 "value": values,
             }
-        elif type_name == 'ByteProperty':
+        elif type_name == "ByteProperty":
+            enum_type = self.fstring()
+            _id = self.optional_guid()
+            if enum_type == "None":
+                enum_value = self.byte()
+            else:
+                enum_value = self.fstring()
             value = {
-                'unknown_str': self.fstring(),
-                'unknown_number': self.u16(),
+                "id": _id,
+                "value": {
+                    "type": enum_type,
+                    "value": enum_value,
+                },
             }
         elif type_name == 'UInt16Property':
             value = {
@@ -843,9 +852,13 @@ class FArchiveWriter:
                 )
         elif property_type == "StructProperty":
             size = self.struct(property)
-        elif property_type == 'ByteProperty':
-            self.fstring(property['unknown_str'])
-            self.u16(property['unknown_number'])
+        elif property_type == "ByteProperty":
+            self.fstring(property["value"]["type"])
+            self.optional_guid(property.get("id", None))
+            if property["value"]["type"] == "None":
+                self.byte(property["value"]["value"])
+            else:
+                self.fstring(property["value"]["value"])
             size = 1
         elif property_type == "IntProperty":
             self.optional_guid(property.get("id", None))
