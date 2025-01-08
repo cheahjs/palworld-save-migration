@@ -248,7 +248,7 @@ def encode_bytes(p: dict[str, Any], work_type: str) -> bytes:
         print(
             f"Unknown EPalWorkTransformType, please report this: {transform_type}: {work_type}"
         )
-        writer.write(p["transform"]["raw_data"])
+        writer.write(bytes(p["transform"]["raw_data"]))
 
     encoded_bytes = writer.bytes()
     return encoded_bytes
