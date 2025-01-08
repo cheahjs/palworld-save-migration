@@ -54,7 +54,7 @@ def module_passive_effect_reader(reader: FArchiveReader) -> dict[str, Any]:
         raise Exception(f"Unknown passive effect type {data['type']}")
     elif data["type"] == 2:
         data["work_hard_type"] = reader.byte()
-        data["unknown_trailer"] = [b for b in reader.read(4)]
+        data["unknown_trailer"] = [b for b in reader.read(12)]
     return data
 
 
@@ -85,11 +85,11 @@ def decode_bytes(
             )
             return {"values": b_bytes}
     else:
-        print(f"Warning: Unknown base camp module type {module_type}, skipping")
+        print(f"Warning: Unknown base camp module type {module_type}, bytes sequence: {b_bytes}, skipping")
         return {"values": b_bytes}
 
     if not reader.eof():
-        print(f"Warning: EOF not reached for {module_type}")
+        print(f"Warning: EOF not reached for {module_type}, bytes sequence: {b_bytes}")
 
     return data
 
