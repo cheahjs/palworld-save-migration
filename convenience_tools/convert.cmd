@@ -12,7 +12,7 @@ if not exist "convert.py" (
 )
 
 :: Try every possible Python command until one works
-for %%A in (python3 python py) do (
+for %%A in (python3 python py) do @(
     echo Checking if Python is installed as %%A
     where %%A
     if !ERRORLEVEL! equ 0 (
